@@ -6,13 +6,20 @@
   "display": "standalone",
   "background_color": "#3b4664",
   "theme_color": "#00ffff",
-  "categories": ["utilities", "productivity"],
+  "orientation": "portrait",
+  "categories": ["productivity", "utilities"],
   "icons": [
     {
       "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "screenshots": [
@@ -21,14 +28,14 @@
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "GASA TECH Calculator Home"
+      "label": "GASA TECH Calculator Desktop View"
     },
     {
       "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "GASA TECH Calculator Mobile"
+      "label": "GASA TECH Calculator Mobile View"
     }
   ]
 }
