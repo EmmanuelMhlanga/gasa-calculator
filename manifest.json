@@ -1,9 +1,17 @@
 {
   "name": "GASA TECH Calculator",
   "short_name": "GasaCalc",
-  "start_url": ".",
+  "description": "A premium, high-performance dark-themed calculator by GASA TECH, featuring neon cyan highlights and advanced math logic.",
+  "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#3b4664",
+  "background_color": "#232a3d",
   "theme_color": "#00ffff",
-  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png" }]
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
