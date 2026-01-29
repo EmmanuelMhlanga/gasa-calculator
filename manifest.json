@@ -4,14 +4,31 @@
   "description": "A premium, high-performance dark-themed calculator by GASA TECH, featuring neon cyan highlights and advanced math logic.",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#232a3d",
+  "background_color": "#3b4664",
   "theme_color": "#00ffff",
+  "categories": ["utilities", "productivity"],
   "icons": [
     {
       "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "GASA TECH Calculator Home"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "GASA TECH Calculator Mobile"
     }
   ]
 }
