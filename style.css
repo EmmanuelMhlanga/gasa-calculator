@@ -1,0 +1,19 @@
+:root {
+    --bg: #3b4664;
+    --text: #ffffff;
+    --op-btn: #ffa500;
+    --shadow-dark: #242d44;
+    --shadow-light: #44506f;
+}
+body { background-color: var(--bg); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: Arial, sans-serif; }
+.calculator { background-color: var(--bg); width: 320px; padding: 30px; border-radius: 40px; box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light); }
+.brand { color: #00ffff; font-weight: bold; margin-bottom: 20px; letter-spacing: 2px; text-align: center; }
+.display-container { text-align: right; margin-bottom: 30px; padding: 10px; }
+.display { font-size: 3rem; color: var(--text); font-weight: bold; }
+.history { font-size: 1rem; color: var(--text); opacity: 0.5; min-height: 1.2rem; }
+.buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+button { width: 60px; height: 60px; border-radius: 50%; border: none; background-color: var(--bg); color: var(--text); font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light); transition: 0.2s; }
+button:active { box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light); }
+.functional { background-color: #a2b2cf; color: #3b4664; }
+.operator { background-color: var(--op-btn); color: white; }
+.zero { grid-column: span 2; width: 135px; border-radius: 40px; }
