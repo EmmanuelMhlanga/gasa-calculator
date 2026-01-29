@@ -1,0 +1,9 @@
+{
+  "name": "GASA TECH Calculator",
+  "short_name": "GasaCalc",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#3b4664",
+  "theme_color": "#00ffff",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png" }]
+}
