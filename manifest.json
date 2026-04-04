@@ -1,11 +1,12 @@
 {
   "name": "GASA TECH Calculator",
   "short_name": "GasaCalc",
-  "description": "A premium, high-performance dark-themed calculator by GASA TECH, featuring neon cyan highlights and advanced math logic.",
-  "start_url": "index.html",
+  "description": "A premium, high-performance glassmorphic calculator by GASA TECH, featuring modern UI and advanced offline logic.",
+  "id": "/gasa-calculator/",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#3b4664",
-  "theme_color": "#00ffff",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00d2d3",
   "orientation": "portrait",
   "categories": ["productivity", "utilities"],
   "icons": [
@@ -24,18 +25,18 @@
   ],
   "screenshots": [
     {
-      "src": "icon.png",
-      "sizes": "512x512",
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "GASA TECH Calculator Desktop View"
+      "label": "GASA TECH Calculator Desktop Experience"
     },
     {
-      "src": "icon.png",
-      "sizes": "512x512",
+      "src": "screenshot-mobile.png",
+      "sizes": "720x1280",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "GASA TECH Calculator Mobile View"
+      "label": "GASA TECH Calculator Mobile Experience"
     }
   ]
 }
