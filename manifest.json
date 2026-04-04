@@ -1,14 +1,19 @@
 {
-  "name": "GASA TECH Calculator",
-  "short_name": "GasaCalc",
-  "description": "A premium, high-performance neomorphic calculator by GASA TECH, featuring soft UI and advanced offline logic.",
+  "name": "GASA TECH Elite Pro Calculator",
+  "short_name": "GasaCalc Pro",
+  "description": "A premium, high-performance neomorphic utility by GASA TECH. Features advanced scientific logic, unit converters, ZAR currency exchange, and full offline support for professional developers.",
   "id": "/gasa-calculator/",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#2c333f",
   "theme_color": "#32394a",
   "orientation": "portrait",
-  "categories": ["productivity", "utilities"],
+  "categories": [
+    "productivity",
+    "utilities",
+    "education",
+    "finance"
+  ],
   "icons": [
     {
       "src": "icon.png",
@@ -21,6 +26,22 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Clear History",
+      "short_name": "Clear",
+      "description": "Open calculator and clear all previous history logs",
+      "url": "./index.html?action=clear",
+      "icons": [{ "src": "icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Currency Converter",
+      "short_name": "Rates",
+      "description": "Check latest ZAR exchange rates",
+      "url": "./index.html?mode=currency",
+      "icons": [{ "src": "icon.png", "sizes": "192x192" }]
     }
   ],
   "screenshots": [
@@ -38,5 +59,15 @@
       "form_factor": "narrow",
       "label": "GASA TECH Calculator Mobile Experience"
     }
-  ]
+  ],
+  "related_applications": [
+    {
+      "platform": "windows",
+      "url": "https://www.microsoft.com/store/apps/gasatech-calculator"
+    }
+  ],
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
 }
