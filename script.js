@@ -1,42 +1,38 @@
 const screen = document.getElementById('screen');
 const historyLog = document.getElementById('history-log');
 
-/**
- * 1. DYNAMIC GREETING 
- * Personalized UX for the Gasa Tech brand
- */
-const updateGreeting = () => {
-    const hour = new Date().getHours();
+// 1. Gasa Tech Dynamic Greeting
+const setGreeting = () => {
+    const hr = new Date().getHours();
     const greetElement = document.getElementById('greeting');
     if (!greetElement) return;
-
-    if (hour < 12) greetElement.innerText = "Good Morning";
-    else if (hour < 18) greetElement.innerText = "Good Afternoon";
+    
+    if (hr < 12) greetElement.innerText = "Good Morning";
+    else if (hr < 18) greetElement.innerText = "Good Afternoon";
     else greetElement.innerText = "Good Evening";
 };
-updateGreeting();
+setGreeting();
 
-/**
- * 2. CORE CALCULATOR LOGIC
- */
+// 2. Core Logic with Input Protection
 function appendValue(val) {
-    // Prevent multiple decimal points in one number
-    if (val === '.' && screen.innerText.split(/[\+\-\*\/]/).pop().includes('.')) return;
+    playHaptic();
+    
+    // Prevent multiple decimals in a single number block
+    if (val === '.') {
+        const parts = screen.innerText.split(/[\+\-\*\/]/);
+        if (parts[parts.length - 1].includes('.')) return;
+    }
 
     if (screen.innerText === '0' && val !== '.') {
         screen.innerText = val;
-    } else {
-        // Limit display length to prevent UI breaking
-        if (screen.innerText.length < 15) {
-            screen.innerText += val;
-        }
+    } else if (screen.innerText.length < 16) { // Prevent UI overflow
+        screen.innerText += val;
     }
-    playHaptic();
 }
 
 function clearScreen() {
     screen.innerText = '0';
-    if (historyLog) historyLog.innerText = '';
+    historyLog.innerText = '';
 }
 
 function deleteLast() {
@@ -49,56 +45,46 @@ function deleteLast() {
 
 function calculate() {
     try {
-        const rawExpression = screen.innerText;
-        // Safety check for empty or operator-only strings
-        if (/^[\+\-\*\/]/.test(rawExpression) || /[\+\-\*\/]$/.test(rawExpression)) return;
-
-        let expression = rawExpression
+        const rawInput = screen.innerText;
+        // Sanitize for eval
+        let expression = rawInput
             .replace(/÷/g, '/')
             .replace(/×/g, '*')
             .replace(/−/g, '-');
 
-        // Professional Math Handling
         let result = eval(expression);
 
-        // Handle Division by Zero
+        // Handle Math Errors
         if (!isFinite(result)) {
-            throw new Error("DivByZero");
+            throw new Error("Infinity");
         }
 
-        // Show history
-        if (historyLog) historyLog.innerText = rawExpression + " =";
-
-        // Precision Control: Max 4 decimals for clean UI
+        historyLog.innerText = rawInput + " =";
+        // Format decimals to 4 places maximum
         screen.innerText = Number.isInteger(result) ? result : parseFloat(result.toFixed(4));
-
-    } catch (err) {
-        screen.innerText = err.message === "DivByZero" ? "Can't divide by 0" : "Error";
+        
+    } catch (e) {
+        screen.innerText = e.message === "Infinity" ? "Can't divide by 0" : "Error";
         setTimeout(clearScreen, 2000);
     }
 }
 
-/**
- * 3. KEYBOARD SUPPORT (Essential for Microsoft Store)
- */
+// 3. Professional Keyboard Support
 document.addEventListener('keydown', (e) => {
-    const key = e.key;
-    if (/[0-9]/.test(key)) appendValue(key);
-    if (key === '.') appendValue('.');
-    if (key === '+') appendValue('+');
-    if (key === '-') appendValue('-');
-    if (key === '*') appendValue('*');
-    if (key === '/') { e.preventDefault(); appendValue('/'); }
-    if (key === 'Enter' || key === '=') { e.preventDefault(); calculate(); }
-    if (key === 'Backspace') deleteLast();
-    if (key === 'Escape') clearScreen();
+    if (e.key >= '0' && e.key <= '9') appendValue(e.key);
+    if (e.key === '.') appendValue('.');
+    if (e.key === '+') appendValue('+');
+    if (e.key === '-') appendValue('-');
+    if (e.key === '*') appendValue('*');
+    if (e.key === '/') { e.preventDefault(); appendValue('/'); }
+    if (e.key === 'Enter' || e.key === '=') { e.preventDefault(); calculate(); }
+    if (e.key === 'Backspace') deleteLast();
+    if (e.key === 'Escape') clearScreen();
 });
 
-/**
- * 4. HAPTIC FEEDBACK (Great for Samsung/Mobile)
- */
+// 4. Mobile Haptic Feedback
 function playHaptic() {
-    if (window.navigator && window.navigator.vibrate) {
-        window.navigator.vibrate(10); // Small 10ms vibration
+    if (navigator.vibrate) {
+        navigator.vibrate(15);
     }
 }
