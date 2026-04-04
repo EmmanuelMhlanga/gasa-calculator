@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GASA TECH | Elite Calculator</title>
+    <title>GASA TECH | Elite Pro</title>
     <meta name="description" content="High-performance neomorphic calculator by Gasa Tech.">
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2c333f"> <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#2c333f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="msapplication-config" content="browserconfig.xml">
 
@@ -16,34 +17,70 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="theme-default">
     
-    <div class="bg-blobs"></div> 
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>GASA TECH MENU</h3>
+            <span class="close-menu" onclick="toggleMenu()">×</span>
+        </div>
+        <div class="menu-section">
+            <h4>Elite Customization</h4>
+            <button onclick="setTheme('default')">Neumorphic Pro</button>
+            <button onclick="setTheme('glass')">Glassmorphism Mode</button>
+            <button onclick="setTheme('high-contrast')">Outdoor High-Contrast</button>
+        </div>
+        <div class="menu-section">
+            <h4>Utilities</h4>
+            <button onclick="openConverter('currency')">ZAR Currency Converter</button>
+            <button onclick="openConverter('units')">Unit Converter</button>
+            <button onclick="copyHistory()">Export History</button>
+        </div>
+        <div class="menu-footer">
+            <p>Gasa Tech v2.0 | Elite Pro Edition</p>
+        </div>
+    </nav>
 
-    <main class="calculator" role="main">
-        
+    <main class="calculator" role="main" id="calc-body">
         <header class="brand-header">
-            <span class="menu-icon">≡</span>
-            <div class="brand">GASA TECH</div>
-            <div class="clock" id="clock">04:20 PM</div> </header>
+            <span class="menu-icon" onclick="toggleMenu()">≡</span>
+            <div class="brand-group">
+                <div class="brand">GASA TECH</div>
+                <div class="greeting" id="greeting">Elite Pro</div>
+            </div>
+            <div class="status-group">
+                <span id="offline-tag" class="hidden">Offline</span>
+                <div class="clock" id="clock">00:00 AM</div>
+            </div>
+        </header>
 
-        <div class="display-container">
-            <div class="history" id="history-log"></div>
+        <div class="display-container" onclick="toggleNotation()">
+            <div class="history-container">
+                <div class="history" id="history-log"></div>
+                <div class="memory-indicator" id="mem-indicator"></div>
+            </div>
             <div class="display" id="screen">0</div>
         </div>
 
         <div class="buttons">
-            <button onclick="toggleSecond()" class="functional scientific">2nd</button>
-            <button onclick="memoryAdd()" class="functional scientific">M+</button>
-            <button onclick="memoryRecall()" class="functional scientific">MR</button>
+            <button onclick="toggleSecond()" class="scientific" id="btn-2nd">2nd</button>
+            <button onclick="memoryAdd()" class="scientific">M+</button>
+            <button onclick="memoryRecall()" class="scientific">MR</button>
             <button onclick="appendValue('/')" class="operator">÷</button>
             
-            <button onclick="calculateSquareRoot()" class="scientific">√</button>
-            <button onclick="calculateSquare()" class="scientific">x²</button>
-            <button onclick="appendValue('π')" class="scientific">π</button>
+            <div class="scientific-row-toggle" id="sci-row">
+                <button onclick="sciFunc('sqrt')" class="scientific">√</button>
+                <button onclick="sciFunc('sq')" class="scientific">x²</button>
+                <button onclick="appendValue('π')" class="scientific">π</button>
+            </div>
+            <div class="scientific-row-toggle hidden" id="sci-row-alt">
+                <button onclick="sciFunc('sin')" class="scientific">sin</button>
+                <button onclick="sciFunc('cos')" class="scientific">cos</button>
+                <button onclick="sciFunc('tan')" class="scientific">tan</button>
+            </div>
             <button onclick="appendValue('*')" class="operator">×</button>
             
-            <button onclick="clearScreen()" class="functional">AC</button>
+            <button onclick="clearScreen()" class="functional" id="ac-btn">AC</button>
             <button onclick="deleteLast()" class="functional">DEL</button>
             <button onclick="appendValue('%')" class="functional">%</button>
             <button onclick="appendValue('-')" class="operator">−</button>
@@ -56,32 +93,46 @@
             <button onclick="appendValue('4')">4</button>
             <button onclick="appendValue('5')">5</button>
             <button onclick="appendValue('6')">6</button>
-            <button onclick="calculate()" class="operator">=</button>
+            <button onclick="calculate()" class="operator-equal" id="equals-btn">=</button>
             
             <button onclick="appendValue('1')">1</button>
             <button onclick="appendValue('2')">2</button>
             <button onclick="appendValue('3')">3</button>
             
             <button onclick="appendValue('0')" class="zero">0</button>
-            <button onclick="appendValue('.')" class="scientific">.</button>
+            <button onclick="appendValue('.')">.</button>
         </div>
+
+        <footer class="ticker-footer">
+            <div class="ticker-wrap">
+                <div class="ticker" id="gasa-news">
+                    GASA TECH: Elite Pro App Loaded... Check menu for Unit Converters... Serving Johannesburg Developers...
+                </div>
+            </div>
+        </footer>
     </main>
+
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <script src="script.js"></script>
     <script>
-        // Essential for making it look like the reference, which is 
-        // essentially a native window, not a browser page.
+        // PWA & Connectivity Monitoring (Rec 41, 42)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Gasa Tech SW Registered'))
-                    .catch(err => console.log('SW Registration Failed', err));
+                navigator.serviceWorker.register('./sw.js').then(reg => {
+                    reg.onupdatefound = () => {
+                        console.log("New Gasa Tech version available!"); // Rec 42
+                    };
+                });
             });
         }
-
-        // --- Keep your original Logic/Functions below ---
-        // (functions clearScreen, deleteLast, appendValue, calculate, etc.)
-        // Ensure you also create calculateSquareRoot(), memoryRecall(), etc.
+        
+        window.addEventListener('offline', () => {
+            document.getElementById('offline-tag').classList.remove('hidden');
+        });
+        window.addEventListener('online', () => {
+            document.getElementById('offline-tag').classList.add('hidden');
+        });
     </script>
 </body>
 </html>
