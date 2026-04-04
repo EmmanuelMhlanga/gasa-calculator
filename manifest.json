@@ -1,12 +1,12 @@
 {
   "name": "GASA TECH Calculator",
   "short_name": "GasaCalc",
-  "description": "A premium, high-performance glassmorphic calculator by GASA TECH, featuring modern UI and advanced offline logic.",
+  "description": "A premium, high-performance neomorphic calculator by GASA TECH, featuring soft UI and advanced offline logic.",
   "id": "/gasa-calculator/",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#00d2d3",
+  "background_color": "#2c333f",
+  "theme_color": "#32394a",
   "orientation": "portrait",
   "categories": ["productivity", "utilities"],
   "icons": [
