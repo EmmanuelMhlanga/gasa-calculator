@@ -4,27 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GASA TECH | Elite Calculator</title>
-    <meta name="description" content="High-performance glassmorphic calculator by Gasa Tech.">
+    <meta name="description" content="High-performance neomorphic calculator by Gasa Tech.">
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0a0a0a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#2c333f"> <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="msapplication-config" content="browserconfig.xml">
 
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    
     <div class="bg-blobs"></div> 
 
     <main class="calculator" role="main">
+        
         <header class="brand-header">
+            <span class="menu-icon">≡</span>
             <div class="brand">GASA TECH</div>
-            <div class="greeting" id="greeting">Elite Edition</div>
-        </header>
+            <div class="clock" id="clock">04:20 PM</div> </header>
 
         <div class="display-container">
             <div class="history" id="history-log"></div>
@@ -32,34 +33,44 @@
         </div>
 
         <div class="buttons">
+            <button onclick="toggleSecond()" class="functional scientific">2nd</button>
+            <button onclick="memoryAdd()" class="functional scientific">M+</button>
+            <button onclick="memoryRecall()" class="functional scientific">MR</button>
+            <button onclick="appendValue('/')" class="operator">÷</button>
+            
+            <button onclick="calculateSquareRoot()" class="scientific">√</button>
+            <button onclick="calculateSquare()" class="scientific">x²</button>
+            <button onclick="appendValue('π')" class="scientific">π</button>
+            <button onclick="appendValue('*')" class="operator">×</button>
+            
             <button onclick="clearScreen()" class="functional">AC</button>
             <button onclick="deleteLast()" class="functional">DEL</button>
             <button onclick="appendValue('%')" class="functional">%</button>
-            <button onclick="appendValue('/')" class="operator">÷</button>
+            <button onclick="appendValue('-')" class="operator">−</button>
             
             <button onclick="appendValue('7')">7</button>
             <button onclick="appendValue('8')">8</button>
             <button onclick="appendValue('9')">9</button>
-            <button onclick="appendValue('*')" class="operator">×</button>
+            <button onclick="appendValue('+')" class="operator">+</button>
             
             <button onclick="appendValue('4')">4</button>
             <button onclick="appendValue('5')">5</button>
             <button onclick="appendValue('6')">6</button>
-            <button onclick="appendValue('-')" class="operator">−</button>
+            <button onclick="calculate()" class="operator">=</button>
             
             <button onclick="appendValue('1')">1</button>
             <button onclick="appendValue('2')">2</button>
             <button onclick="appendValue('3')">3</button>
-            <button onclick="appendValue('+')" class="operator">+</button>
             
             <button onclick="appendValue('0')" class="zero">0</button>
-            <button onclick="appendValue('.')">.</button>
-            <button onclick="calculate()" class="operator">=</button>
+            <button onclick="appendValue('.')" class="scientific">.</button>
         </div>
     </main>
 
     <script src="script.js"></script>
     <script>
+        // Essential for making it look like the reference, which is 
+        // essentially a native window, not a browser page.
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
@@ -67,10 +78,10 @@
                     .catch(err => console.log('SW Registration Failed', err));
             });
         }
-    </script>
-</body>
-</html>
 
-    <script src="script.js"></script>
+        // --- Keep your original Logic/Functions below ---
+        // (functions clearScreen, deleteLast, appendValue, calculate, etc.)
+        // Ensure you also create calculateSquareRoot(), memoryRecall(), etc.
+    </script>
 </body>
 </html>
